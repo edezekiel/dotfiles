@@ -1,6 +1,7 @@
 [user]
 	email = ed.a.ezekiel@gmail.com
 	name = Edward Ezekiel
+	signingkey = ~/.ssh/id_sign_ed25519
 [paper]
 	branch = false
 [core]
@@ -25,5 +26,14 @@
 	sw = switch
 [init]
 	defaultBranch = main
+[gpg]
+	format = ssh
 [commit]
-	gpgSign = false
+	gpgsign = true
+[gpg "ssh"]
+	allowedSignersFile = /Users/edward/.ssh/allowed_signers
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
