@@ -4,10 +4,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# nvm
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,f
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -103,8 +99,30 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"s
-alias ls="exa --long --header --git"
-alias lsla="exa --long --header --git -a"
-alias tree="exa --tree --level=2"
+alias ls="eza --long --header --git"
+alias lsla="eza --long --header --git -a"
+alias tree="eza --tree --level=2"
 
 alias dot='/usr/bin/git --git-dir=/Users/edward/dotfiles --work-tree=/Users/edward'
+
+alias dup="devcontainer up --workspace-folder ."
+alias dexec="devcontainer exec --workspace-folder ."
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+eval "$(direnv hook zsh)"
+
+# pnpm
+export PNPM_HOME="/Users/edward/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export PATH=$PATH:/Users/edward/go/bin
+
+eval "$(/Users/edward/.local/bin/mise activate zsh)"
