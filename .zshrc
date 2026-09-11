@@ -119,11 +119,14 @@ eval "$(direnv hook zsh)"
 # pnpm
 export PNPM_HOME="/Users/edward/Library/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
 
 export PATH=$PATH:/Users/edward/go/bin
 
-eval "$(/Users/edward/.local/bin/mise activate zsh)"
+eval "$(mise activate zsh)"
+export PATH="$HOME/.local/bin:$PATH"
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
