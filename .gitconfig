@@ -6,8 +6,10 @@
 	branch = false
 [core]
   	editor = code --wait
+	pager = delta
 [merge]
     tool = default-mergetool
+	conflictStyle = zdiff3
 [mergetool "default-mergetool"]
     cmd = code --wait $MERGED
 [diff]
@@ -15,7 +17,6 @@
 [difftool "default-difftool"]
     cmd = code --wait --diff $LOCAL $REMOTE
 [pager]
-	diff = false
 	branch = false
 [alias]
 	co = checkout
@@ -24,6 +25,7 @@
         st = status
         lg = log -n 3 --oneline
 	sw = switch
+	p = grep --heading --break -n
 [init]
 	defaultBranch = main
 [gpg]
@@ -37,3 +39,16 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+	side-by-side = true
+	line-numbers = true
