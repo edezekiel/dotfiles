@@ -1,0 +1,4 @@
+[[mgr.prepend_keymap]]
+on   = "T"
+run  = "shell --orphan 'open \"warp://action/new_tab?path=$PWD\"'"
+desc = "Open new Warp tab in current directory"

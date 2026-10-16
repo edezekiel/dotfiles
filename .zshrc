@@ -105,7 +105,6 @@ alias tree="eza --tree --level=2"
 
 alias dot='/usr/bin/git --git-dir=/Users/edward/dotfiles --work-tree=/Users/edward'
 
-alias nes="./.local/bin/nes-local-dev.sh"
 alias dup="devcontainer up --workspace-folder ."
 alias dexec="devcontainer exec --workspace-folder ."
 
@@ -130,3 +129,14 @@ eval "$(mise activate zsh)"
 export PATH="$HOME/.local/bin:$PATH"
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+function y() {
+	local tmp cwd; tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
+	command rm -f -- "$tmp"
+}
+
+
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
