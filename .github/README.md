@@ -75,3 +75,21 @@ mkdir $HOME/.github
 cd $HOME/.github
 touch README.md
 ```
+
+## Tools
+
+Homebrew packages are listed in `~/.Brewfile`. Install them with:
+
+```sh
+brew bundle --global
+```
+
+Globally available CLI tools managed by [mise](https://mise.jdx.dev) are listed in
+`~/.config/mise/config.toml`. Install them with:
+
+```sh
+mise install
+```
+
+Machine- or work-specific config is kept out of this repo: `~/.zshrc.local` is sourced
+from `.zshrc` if present, and `~/.Brewfile.work` holds extra packages.
