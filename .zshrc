@@ -129,3 +129,14 @@ eval "$(mise activate zsh)"
 export PATH="$HOME/.local/bin:$PATH"
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+function y() {
+	local tmp cwd; tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
+	command rm -f -- "$tmp"
+}
+
+
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
