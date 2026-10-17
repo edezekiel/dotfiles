@@ -29,6 +29,8 @@ alias tree="eza --tree --level=2"
 alias dot='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 alias h="alias"
 alias g="git"
+alias gsw="git switch"
+alias glo="git log -n 3 --oneline"
 alias ..="cd .."
 alias ...="cd ../.."
 

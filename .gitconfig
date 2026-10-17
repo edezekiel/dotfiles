@@ -21,8 +21,6 @@
 	br = branch
 	ci = commit
 	st = status
-	lg = log -n 3 --oneline
-	sw = switch
 	p = grep --heading --break -n
 [init]
 	defaultBranch = main
