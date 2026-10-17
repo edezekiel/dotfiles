@@ -1,4 +1,9 @@
 [[mgr.prepend_keymap]]
 on   = "T"
-run  = "shell --orphan 'open \"warp://action/new_tab?path=$PWD\"'"
-desc = "Open new Warp tab in current directory"
+run  = 'shell --orphan "if [ -n \"$TMUX\" ]; then tmux new-window -c \"$PWD\"; else open -na Ghostty --args --working-directory=\"$PWD\"; fi"'
+desc = "Open current directory in a new tmux window, or a new Ghostty window"
+
+[[mgr.prepend_keymap]]
+on   = "<C-g>"
+run  = "shell --block 'lazygit'"
+desc = "Open lazygit here"
