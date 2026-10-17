@@ -1,95 +1,59 @@
 # Dotfiles
 
 **Created by**: Edward Ezekiel <ed.a.ezekiel@gmail.com>
-**Version**: 1.0, 10.15.2024
-**Description**: Dotfiles configuration
+**Description**: Dotfiles configuration, kept in a bare git repository with `$HOME` as the work tree.
 
-## Backup technique
+## New machine
 
-I used a _git bare repository_ to backup my dotfiles. See [DistroTube](https://www.youtube.com/watch?v=tBoLDpTWVOM&t=2s);
-[Atlassian](https://www.atlassian.com/git/tutorials/dotfiles).
-
-### Git bare repository setup
-
-#### 1. Create a bare repository
-
-Create a dotfiles directory:
+Four steps. Everything after the clone is declared in `~/.config/mise/config.toml` and applied by
+[mise bootstrap](https://mise.jdx.dev/bootstrap.html).
 
 ```sh
-cd $HOME && mkdir dotfiles
+# 1. Homebrew, then mise
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install mise
+
+# 2. Clone the bare repo and check out the tracked files into $HOME
+git clone --bare git@github.com:edezekiel/dotfiles.git $HOME/dotfiles
+alias dot='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
+dot checkout   # if this complains about existing files, move them aside and run it again
+
+# 3. Preview, then apply
+mise bootstrap --dry-run
+mise bootstrap
+
+# 4. Open a new shell
 ```
 
-Initialize the bare git repository in the dotfiles directory:
+`mise bootstrap` installs the Homebrew formulae and casks, the mise-managed CLI tools, the
+betterleaks pre-commit hook and exclude list for the bare repo, and the macOS defaults. It is
+safe to run again at any time; `mise bootstrap status` shows what is in place.
 
-```sh
-git init --bare $HOME/dotfiles
-```
+## Local overrides
 
-#### 2. Link the bare repository with a worktree
+Machine- or work-specific config lives next to the tracked files and is never committed. The
+bare repo's `info/exclude` ignores these paths, and `mise bootstrap` creates them empty if missing:
 
-```sh
-echo "alias dot='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'" >> $HOME/.zshrc
-```
+| File | Used by |
+|---|---|
+| `~/.zshrc.local` | sourced at the end of `.zshrc` |
+| `~/.gitconfig.local` | included from `.gitconfig` |
+| `~/.ssh/config.local` | included from `.ssh/config` |
+| `~/.claude/CLAUDE.local.md` | imported from `.claude/CLAUDE.md` |
+| `~/.config/mise/conf.d/*.toml` | extra `[bootstrap.packages]` and tools for mise |
 
-- You can name the alias whatever you'd like, in this case I called it _dot_
-- The command creates a permanent alias in your .zshrc
+## Day to day
 
-#### 3. Hide untracked files
-
-```sh
-dot config --local status.showUntrackedFiles no
-```
-
-#### 4. Reload your shell
-
-Reload your shell (or close the terminal and open a new one):
-
-```sh
-source $HOME/.zshrc
-```
-
-#### 5. Push dotfiles to GitHub
-
-Create a new repository in GitHub called 'dotfiles'.
-
-```sh
-dot remote add origin git@github.com:edezekiel/dotfiles.git
-dot branch -M main
-dot push -u origin main
-```
-
-Add local dotfiles and push to the repository (repeat for each dotfile you
-would want to backup):
+`dot` is `git` for this repo. The pre-commit hook runs betterleaks on the staged diff.
 
 ```sh
 dot status
 dot add .zshrc
-dot commit -m "feat: Add my .zshrc"
+dot commit -m "feat: ..."
 dot push
 ```
 
-#### 6. Create a README file (optional)
+## Why a bare repository
 
-```sh
-mkdir $HOME/.github
-cd $HOME/.github
-touch README.md
-```
-
-## Tools
-
-Homebrew packages are listed in `~/.Brewfile`. Install them with:
-
-```sh
-brew bundle --global
-```
-
-Globally available CLI tools managed by [mise](https://mise.jdx.dev) are listed in
-`~/.config/mise/config.toml`. Install them with:
-
-```sh
-mise install
-```
-
-Machine- or work-specific config is kept out of this repo: `~/.zshrc.local` is sourced
-from `.zshrc` if present, and `~/.Brewfile.work` holds extra packages.
+See [Atlassian's write-up](https://www.atlassian.com/git/tutorials/dotfiles). No symlinks, no
+install script for the files themselves: the tracked files sit where their programs expect them.
