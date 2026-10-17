@@ -1,0 +1,9 @@
+# Global gitignore. Git reads this file by default; no core.excludesfile needed.
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.env
+.env.*
+!.env.example
+.direnv/

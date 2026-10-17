@@ -1,0 +1,4 @@
+# Warp custom keybindings. Restart Warp after editing.
+# Action names: Settings > Keyboard Shortcuts, or https://docs.warp.dev/terminal/appearance/keyboard-shortcuts
+"workspace:activate_next_tab": ctrl-tab
+"workspace:activate_prev_tab": ctrl-shift-tab
