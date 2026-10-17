@@ -27,6 +27,7 @@ alias ls="eza --long --header --git"
 alias lsla="eza --long --header --git -a"
 alias tree="eza --tree --level=2"
 alias dot='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
+alias h="alias"
 alias g="git"
 alias ..="cd .."
 alias ...="cd ../.."
