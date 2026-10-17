@@ -1,7 +1,7 @@
 [[mgr.prepend_keymap]]
 on   = "T"
-run  = 'shell --orphan "if [ -n \"$TMUX\" ]; then tmux new-window -c \"$PWD\"; else open -na Ghostty --args --working-directory=\"$PWD\"; fi"'
-desc = "Open current directory in a new tmux window, or a new Ghostty window"
+run  = 'shell --orphan "if [ -n \"$TMUX\" ]; then tmux new-window -c \"$PWD\"; else open \"warp://action/new_tab?path=$PWD\"; fi"'
+desc = "Open current directory in a new tmux window, or a new Warp tab"
 
 [[mgr.prepend_keymap]]
 on   = "<C-g>"
