@@ -30,6 +30,7 @@ idiomatic_version_file_enable_tools = ["node"]
 "brew:tmux" = "latest"
 "brew:yamlfmt" = "latest"
 "brew:yazi" = "latest"
+"brew:zoxide" = "latest"
 "brew-cask:1password" = "latest" # betterleaks:allow (the cask name trips the generic password rule)
 "brew-cask:docker-desktop" = "latest"
 "brew-cask:font-hack-nerd-font" = "latest"

@@ -27,6 +27,7 @@ alias ls="eza --long --header --git"
 alias lsla="eza --long --header --git -a"
 alias tree="eza --tree --level=2"
 alias dot='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
+alias g="git"
 alias ..="cd .."
 alias ...="cd ../.."
 
@@ -53,6 +54,8 @@ function lg() {
 eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
+# zoxide takes over cd: real paths work as before, anything else matches by frecency (cd nes-portal from anywhere)
+eval "$(zoxide init zsh --cmd cd)"
 
 # Machine-specific overrides, not tracked in dotfiles
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
