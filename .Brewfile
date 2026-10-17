@@ -20,6 +20,7 @@ brew "yazi"
 
 cask "1password"
 cask "docker-desktop"
+cask "font-hack-nerd-font"
 cask "font-symbols-only-nerd-font"
 cask "google-chrome"
 cask "raycast"
