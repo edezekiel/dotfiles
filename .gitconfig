@@ -2,28 +2,26 @@
 	email = ed.a.ezekiel@gmail.com
 	name = Edward Ezekiel
 	signingkey = ~/.ssh/id_sign_ed25519
-[paper]
-	branch = false
 [core]
-  	editor = code --wait
+	editor = code --wait
 	pager = delta
 [merge]
-    tool = default-mergetool
+	tool = default-mergetool
 	conflictStyle = zdiff3
 [mergetool "default-mergetool"]
-    cmd = code --wait $MERGED
+	cmd = code --wait $MERGED
 [diff]
-    tool = default-difftool
+	tool = default-difftool
 [difftool "default-difftool"]
-    cmd = code --wait --diff $LOCAL $REMOTE
+	cmd = code --wait --diff $LOCAL $REMOTE
 [pager]
 	branch = false
 [alias]
 	co = checkout
 	br = branch
 	ci = commit
-        st = status
-        lg = log -n 3 --oneline
+	st = status
+	lg = log -n 3 --oneline
 	sw = switch
 	p = grep --heading --break -n
 [init]
@@ -33,7 +31,7 @@
 [commit]
 	gpgsign = true
 [gpg "ssh"]
-	allowedSignersFile = /Users/edward/.ssh/allowed_signers
+	allowedSignersFile = ~/.ssh/allowed_signers
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
@@ -52,3 +50,7 @@
 	dark = true
 	side-by-side = true
 	line-numbers = true
+
+# Machine-specific overrides (work identity, extra aliases), not tracked in dotfiles
+[include]
+	path = ~/.gitconfig.local
