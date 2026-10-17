@@ -20,6 +20,7 @@ idiomatic_version_file_enable_tools = ["node"]
 "brew:direnv" = "latest"
 "brew:eza" = "latest"
 "brew:gh" = "latest"
+"brew:git" = "latest"
 "brew:git-delta" = "latest"
 "brew:gnupg" = "latest"
 "brew:mise" = "latest"
