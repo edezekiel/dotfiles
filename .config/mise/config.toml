@@ -6,3 +6,7 @@ node = "lts"
 pnpm = "latest"
 jq = "latest"
 rpk = "latest"
+lazygit = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
