@@ -27,8 +27,8 @@ alias ls="eza --long --header --git"
 alias lsla="eza --long --header --git -a"
 alias tree="eza --tree --level=2"
 alias dot='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
-alias dup="devcontainer up --workspace-folder ."
-alias dexec="devcontainer exec --workspace-folder ."
+alias ..="cd .."
+alias ...="cd ../.."
 
 # yazi: cd to the directory yazi was in on exit
 function y() {
@@ -37,6 +37,16 @@ function y() {
 	IFS= read -r -d '' cwd < "$tmp"
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
 	command rm -f -- "$tmp"
+}
+
+# lazygit: cd to the directory lazygit was in on exit (repo or worktree switches)
+function lg() {
+	export LAZYGIT_NEW_DIR_FILE="${TMPDIR:-/tmp}/lazygit-newdir"
+	command lazygit "$@"
+	if [ -f "$LAZYGIT_NEW_DIR_FILE" ]; then
+		builtin cd -- "$(cat "$LAZYGIT_NEW_DIR_FILE")"
+		command rm -f -- "$LAZYGIT_NEW_DIR_FILE"
+	fi
 }
 
 # Tool hooks: mise first so direnv and starship see mise-managed binaries
