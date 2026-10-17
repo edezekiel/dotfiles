@@ -6,7 +6,7 @@ This directory is the public home for my development setup and configuration. Ev
 
 - `~/dev/<project>` is one of my personal repos. Each has its own `CLAUDE.md` or `AGENTS.md`; defer to it once inside.
 - Dotfiles are a bare git repo at `~/dotfiles` with `$HOME` as the work tree. Use the `dot` alias in place of `git` for them.
-- `~/.Brewfile` and `~/.config/mise/config.toml` list the tracked tools. `brew bundle --global` and `mise install` restore them on a new machine.
+- `~/.config/mise/config.toml` declares the Homebrew packages, CLI tools, and macOS defaults. `mise bootstrap` restores them on a new machine; `mise bootstrap status` shows drift.
 - `~/.zshrc.local` is sourced from `.zshrc` when present and holds per-machine overrides that stay out of dotfiles.
 
 ## Skills
