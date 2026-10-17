@@ -1,5 +1,6 @@
-# Global mise tools. Install with: mise install
-# Project-specific versions override these via each repo's mise.toml.
+# Global mise config. Rebuild a machine with: mise bootstrap (preview with --dry-run).
+# Project-specific tool versions override [tools] via each repo's mise.toml.
+# Machine-specific packages live in untracked ~/.config/mise/conf.d/*.toml files.
 
 [tools]
 node = "lts"
@@ -10,3 +11,70 @@ lazygit = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
+
+# Homebrew formulae and casks. Homebrew itself must be installed first.
+[bootstrap.packages]
+"brew:betterleaks" = "latest"
+"brew:coreutils" = "latest"
+"brew:curl" = "latest"
+"brew:direnv" = "latest"
+"brew:eza" = "latest"
+"brew:gh" = "latest"
+"brew:git-delta" = "latest"
+"brew:gnupg" = "latest"
+"brew:mise" = "latest"
+"brew:pandoc" = "latest"
+"brew:rtk" = "latest"
+"brew:starship" = "latest"
+"brew:terminal-notifier" = "latest"
+"brew:tmux" = "latest"
+"brew:yamlfmt" = "latest"
+"brew:yazi" = "latest"
+"brew:zoxide" = "latest"
+"brew-cask:1password" = "latest" # betterleaks:allow (the cask name trips the generic password rule)
+"brew-cask:docker-desktop" = "latest"
+"brew-cask:font-hack-nerd-font" = "latest"
+"brew-cask:font-symbols-only-nerd-font" = "latest"
+"brew-cask:google-chrome" = "latest"
+"brew-cask:raycast" = "latest"
+"brew-cask:slack" = "latest"
+"brew-cask:warp" = "latest"
+
+[bootstrap.directories."~/.ssh"]
+mode = "0700"
+
+# The bare dotfiles repo keeps its hook and exclude list outside the work tree, so they are declared here.
+[bootstrap.files."~/dotfiles/hooks/pre-commit"]
+mode = "0755"
+content = """
+#!/bin/sh
+# Block any commit whose staged diff contains a secret.
+exec betterleaks git --pre-commit --staged --redact --no-banner --verbose
+"""
+
+[bootstrap.files."~/dotfiles/info/exclude"]
+content = """
+# Machine-specific files that sit next to tracked ones and must never be committed.
+.zshrc.local
+.gitconfig.local
+.ssh/config.local
+.claude/CLAUDE.local.md
+.config/mise/conf.d/
+"""
+
+[bootstrap.macos.defaults]
+"NSGlobalDomain" = { AppleInterfaceStyle = "Dark" }
+"com.apple.finder" = { FXPreferredViewStyle = "Nlsv" }
+"com.apple.dock" = { autohide = true }
+"com.apple.screencapture" = { location = "~/Screenshots" }
+
+[bootstrap.hooks]
+post-defaults = "killall Dock || true"
+
+# Runs on every bootstrap, so every step is guarded.
+[tasks.bootstrap]
+run = [
+  "mkdir -p ~/Screenshots ~/.claude ~/.config/mise/conf.d",
+  "for f in ~/.zshrc.local ~/.gitconfig.local ~/.ssh/config.local ~/.claude/CLAUDE.local.md; do [ -e \"$f\" ] || touch \"$f\"; done",
+  "git --git-dir=\"$HOME/dotfiles\" config status.showUntrackedFiles no",
+]
