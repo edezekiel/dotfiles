@@ -1,6 +1,14 @@
 # Default prompt layout, Catppuccin Mocha palette (catppuccin/starship themes/mocha.toml)
 palette = "catppuccin_mocha"
 
+# AWS_PROFILE is always set in work shells, so the aws module is pure noise
+[aws]
+disabled = true
+
+# package.json versions are placeholders in most repos
+[package]
+disabled = true
+
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
 flamingo = "#f2cdcd"
