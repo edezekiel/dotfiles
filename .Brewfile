@@ -1,6 +1,7 @@
 # Core tools for my everyday workflow. Install with: brew bundle --global
 # Work-specific tools live in ~/.Brewfile.work (untracked).
 
+brew "betterleaks"
 brew "coreutils"
 brew "curl"
 brew "direnv"
@@ -11,9 +12,17 @@ brew "gnupg"
 brew "mise"
 brew "pandoc"
 brew "rtk"
+brew "starship"
 brew "terminal-notifier"
+brew "tmux"
 brew "yamlfmt"
 brew "yazi"
 
+cask "1password"
+cask "docker-desktop"
 cask "font-symbols-only-nerd-font"
+cask "ghostty"
+cask "google-chrome"
+cask "raycast"
+cask "slack"
 cask "warp"
