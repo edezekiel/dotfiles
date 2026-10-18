@@ -1,6 +1,7 @@
 # Dotfiles
 
 **Created by**: Edward Ezekiel <ed.a.ezekiel@gmail.com>
+
 **Description**: Dotfiles configuration, kept in a bare git repository with `$HOME` as the work tree.
 
 ## New machine
