@@ -3,17 +3,13 @@
 	name = Edward Ezekiel
 	signingkey = ~/.ssh/id_sign_ed25519
 [core]
-	editor = code --wait
+	editor = vim
 	pager = delta
 [merge]
-	tool = default-mergetool
+	tool = vimdiff
 	conflictStyle = zdiff3
-[mergetool "default-mergetool"]
-	cmd = code --wait $MERGED
 [diff]
-	tool = default-difftool
-[difftool "default-difftool"]
-	cmd = code --wait --diff $LOCAL $REMOTE
+	tool = vimdiff
 [pager]
 	branch = false
 [init]
