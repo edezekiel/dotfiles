@@ -18,6 +18,10 @@ zstyle ':completion:*' menu select
 # Config dir for tools that honour XDG (lazygit otherwise uses ~/Library)
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# vim for anything that opens an editor: git, gh, lazygit, yazi
+export EDITOR="vim"
+export VISUAL="vim"
+
 # PATH (typeset -U drops duplicate entries)
 typeset -U path PATH
 export PATH="$HOME/.local/bin:/opt/homebrew/opt/libpq/bin:$PATH:$HOME/go/bin"
