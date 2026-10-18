@@ -16,12 +16,6 @@
 	cmd = code --wait --diff $LOCAL $REMOTE
 [pager]
 	branch = false
-[alias]
-	co = checkout
-	br = branch
-	ci = commit
-	st = status
-	p = grep --heading --break -n
 [init]
 	defaultBranch = main
 [gpg]
