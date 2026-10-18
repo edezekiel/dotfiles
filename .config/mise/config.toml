@@ -69,6 +69,50 @@ content = """
 "com.apple.dock" = { autohide = true }
 "com.apple.screencapture" = { location = "~/Screenshots" }
 
+# Keyboard modifier remaps (System Settings > Keyboard > Modifier Keys), keyed by keyboard vendor-product id.
+# HID usages 0x7000000XX: 39 Caps Lock, E0/E4 Control, E2/E6 Option, E3/E7 Command. Log out or replug to apply.
+
+# Built-in keyboard
+[[bootstrap.macos.defaults_entries]]
+domain = "NSGlobalDomain"
+key = "com.apple.keyboard.modifiermapping.0-0-0"
+host = "current"
+value = [
+  { HIDKeyboardModifierMappingSrc = 30064771129, HIDKeyboardModifierMappingDst = 30064771300 },
+  { HIDKeyboardModifierMappingSrc = 30064771296, HIDKeyboardModifierMappingDst = 30064771129 },
+  { HIDKeyboardModifierMappingSrc = 30064771300, HIDKeyboardModifierMappingDst = 30064771129 },
+]
+
+# External keyboard (vendor 0x04D9)
+[[bootstrap.macos.defaults_entries]]
+domain = "NSGlobalDomain"
+key = "com.apple.keyboard.modifiermapping.1241-17733-0"
+host = "current"
+value = [
+  { HIDKeyboardModifierMappingSrc = 30064771303, HIDKeyboardModifierMappingDst = 30064771302 },
+  { HIDKeyboardModifierMappingSrc = 30064771296, HIDKeyboardModifierMappingDst = 30064771129 },
+  { HIDKeyboardModifierMappingSrc = 30064771302, HIDKeyboardModifierMappingDst = 30064771303 },
+  { HIDKeyboardModifierMappingSrc = 30064771298, HIDKeyboardModifierMappingDst = 30064771299 },
+  { HIDKeyboardModifierMappingSrc = 30064771300, HIDKeyboardModifierMappingDst = 30064771129 },
+  { HIDKeyboardModifierMappingSrc = 30064771129, HIDKeyboardModifierMappingDst = 30064771300 },
+  { HIDKeyboardModifierMappingSrc = 30064771299, HIDKeyboardModifierMappingDst = 30064771298 },
+]
+
+# Keychron B1 Pro
+[[bootstrap.macos.defaults_entries]]
+domain = "NSGlobalDomain"
+key = "com.apple.keyboard.modifiermapping.13364-1809-0"
+host = "current"
+value = [
+  { HIDKeyboardModifierMappingSrc = 30064771299, HIDKeyboardModifierMappingDst = 30064771298 },
+  { HIDKeyboardModifierMappingSrc = 30064771129, HIDKeyboardModifierMappingDst = 30064771300 },
+  { HIDKeyboardModifierMappingSrc = 30064771300, HIDKeyboardModifierMappingDst = 30064771129 },
+  { HIDKeyboardModifierMappingSrc = 30064771296, HIDKeyboardModifierMappingDst = 30064771129 },
+  { HIDKeyboardModifierMappingSrc = 30064771302, HIDKeyboardModifierMappingDst = 30064771303 },
+  { HIDKeyboardModifierMappingSrc = 30064771298, HIDKeyboardModifierMappingDst = 30064771299 },
+  { HIDKeyboardModifierMappingSrc = 30064771303, HIDKeyboardModifierMappingDst = 30064771302 },
+]
+
 [bootstrap.hooks]
 post-defaults = "killall Dock || true"
 
