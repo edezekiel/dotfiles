@@ -6,7 +6,7 @@
 
 ## New machine
 
-Four steps. Everything after the clone is declared in `~/.config/mise/config.toml` and applied by
+Everything after the clone is declared in `~/.config/mise/config.toml` and applied by
 [mise bootstrap](https://mise.jdx.dev/bootstrap.html).
 
 ```sh
@@ -14,8 +14,8 @@ Four steps. Everything after the clone is declared in `~/.config/mise/config.tom
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install mise
 
-# 2. Clone the bare repo and check out the tracked files into $HOME
-git clone --bare git@github.com:edezekiel/dotfiles.git $HOME/dotfiles
+# 2. Clone the bare repo over HTTPS (no SSH key yet) and check out the tracked files into $HOME
+git clone --bare https://github.com/edezekiel/dotfiles.git $HOME/dotfiles
 alias dot='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 dot checkout   # if this complains about existing files, move them aside and run it again
 
@@ -24,6 +24,9 @@ mise bootstrap --dry-run
 mise bootstrap
 
 # 4. Open a new shell
+
+# 5. After adding an SSH key to GitHub, switch the remote so you can push
+dot remote set-url origin git@github.com:edezekiel/dotfiles.git
 ```
 
 `mise bootstrap` installs the Homebrew formulae and casks, the mise-managed CLI tools, the
