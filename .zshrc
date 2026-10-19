@@ -62,10 +62,18 @@ function lg() {
 # fzf: prompt at top, list grows downward
 export FZF_DEFAULT_OPTS="--layout=reverse"
 
+# f: fuzzy-pick a file with a bat preview and open it in $EDITOR
+function f() {
+	local file
+	file=$(fzf --preview 'bat --color=always --style=numbers --line-range=:300 {}') && ${EDITOR:-vim} "$file"
+}
+
 # Tool hooks: mise first so direnv and starship see mise-managed binaries
 eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
+# fzf keybindings: Ctrl-T file path, Ctrl-R history, Alt-C cd
+eval "$(fzf --zsh)"
 # zoxide takes over cd: real paths work as before, anything else matches by frecency (cd myrepo from anywhere)
 eval "$(zoxide init zsh --cmd cd)"
 
