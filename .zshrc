@@ -33,7 +33,12 @@ alias tree="eza --tree --level=2"
 # bat: cat with syntax highlighting; no pager so it still behaves like cat
 alias cat="bat --paging=never"
 alias dot='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
-alias h="alias"
+# h: list aliases, then the recipes cheatsheet
+function h() {
+	alias
+	echo
+	bat --paging=never --style=plain ~/.config/recipes.md
+}
 alias g="git"
 alias gsw="git switch"
 alias glo="git log -n 3 --oneline"
