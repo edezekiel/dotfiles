@@ -25,7 +25,6 @@ idiomatic_version_file_enable_tools = ["node"]
 "brew:git" = "latest"
 "brew:git-delta" = "latest"
 "brew:gnupg" = "latest"
-"brew:ical-buddy" = "latest"
 "brew:mise" = "latest"
 "brew:pandoc" = "latest"
 "brew:rtk" = "latest"
@@ -128,4 +127,5 @@ run = [
   "mkdir -p ~/Screenshots ~/.claude ~/.config/mise/conf.d",
   "for f in ~/.zshrc.local ~/.gitconfig.local ~/.ssh/config.local ~/.claude/CLAUDE.local.md; do [ -e \"$f\" ] || touch \"$f\"; done",
   "git --git-dir=\"$HOME/dotfiles\" config status.showUntrackedFiles no",
+  "~/.config/swiftbar/calendar-events/build.sh",
 ]

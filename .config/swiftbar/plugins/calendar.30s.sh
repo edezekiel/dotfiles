@@ -4,7 +4,7 @@
 # <swiftbar.hideLastUpdated>true</swiftbar.hideLastUpdated>
 # <swiftbar.hideDisablePlugin>true</swiftbar.hideDisablePlugin>
 # <swiftbar.hideSwiftBar>true</swiftbar.hideSwiftBar>
-# Next event from Calendar.app via icalBuddy. Titles never shown.
+# Next event from Calendar.app via the calendar-events helper (EventKit). Titles never shown.
 #   nothing left today     -> calendar symbol only
 #   next event later       -> calendar symbol, "2:30"
 #   starts within SOON_MIN -> calendar+clock symbol, orange "4m"
@@ -13,6 +13,8 @@
 # Symbol shape changes with state so color is not the only signal.
 
 SOON_MIN=5
+EVENTS="$HOME/.local/bin/calendar-events"
+[[ -x "$EVENTS" ]] || "$HOME/.config/swiftbar/calendar-events/build.sh" >/dev/null 2>&1
 ORANGE='#FF9F0A' ; RED='#FF453A'
 
 now=$(date +%s)
@@ -34,7 +36,7 @@ while IFS=';' read -r range; do
     fi
   fi
   break
-done < <(icalBuddy -nc -b "" -npn -nrd -iep datetime -df "" -tf "%H:%M" -ea eventsToday 2>/dev/null)
+done < <("$EVENTS" 2>/dev/null)
 
 echo "${label} | sfimage=$symbol size=13${color:+ color=$color sfcolor=$color}"
 echo "---"
