@@ -41,6 +41,7 @@ idiomatic_version_file_enable_tools = ["node"]
 "brew-cask:google-chrome" = "latest"
 "brew-cask:raycast" = "latest"
 "brew-cask:slack" = "latest"
+"brew-cask:swiftbar" = "latest"
 "brew-cask:warp" = "latest"
 
 [bootstrap.directories."~/.ssh"]
@@ -66,10 +67,12 @@ content = """
 """
 
 [bootstrap.macos.defaults]
-"NSGlobalDomain" = { AppleInterfaceStyle = "Dark" }
+"NSGlobalDomain" = { AppleInterfaceStyle = "Dark", _HIHideMenuBar = false, AppleMenuBarVisibleInFullscreen = true }
 "com.apple.finder" = { FXPreferredViewStyle = "Nlsv" }
-"com.apple.dock" = { autohide = true }
+"com.apple.dock" = { autohide = true, orientation = "left" }
+"com.apple.controlcenter" = { AutoHideMenuBarOption = 3 } # menu bar never auto-hides
 "com.apple.screencapture" = { location = "~/Screenshots" }
+"com.ameba.SwiftBar" = { PluginDirectory = "~/.config/swiftbar/plugins", MakePluginExecutable = true }
 
 # Keyboard modifier remaps (System Settings > Keyboard > Modifier Keys), keyed by keyboard vendor-product id.
 # HID usages 0x7000000XX: 39 Caps Lock, E0/E4 Control, E2/E6 Option, E3/E7 Command. Log out or replug to apply.
@@ -124,4 +127,5 @@ run = [
   "mkdir -p ~/Screenshots ~/.claude ~/.config/mise/conf.d",
   "for f in ~/.zshrc.local ~/.gitconfig.local ~/.ssh/config.local ~/.claude/CLAUDE.local.md; do [ -e \"$f\" ] || touch \"$f\"; done",
   "git --git-dir=\"$HOME/dotfiles\" config status.showUntrackedFiles no",
+  "~/.config/swiftbar/calendar-events/build.sh",
 ]
