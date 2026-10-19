@@ -157,3 +157,30 @@ map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
  
 "------------------------------------------------------------
+" Plugins {{{1
+"
+" vim-plug, bootstrapped on first launch so a fresh machine needs no manual
+" step. :PlugUpdate to pull newer plugin versions.
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin()
+Plug 'catppuccin/vim', { 'as': 'catppuccin', 'branch': 'main' }
+call plug#end()
+
+"------------------------------------------------------------
+" Colors {{{1
+"
+" Default colorscheme assumes a light background and 16 colors, which looks
+" washed out on a dark truecolor terminal, and the built-in schemes leave
+" markdown groups uncolored.
+if has('termguicolors')
+  set termguicolors
+endif
+set background=dark
+colorscheme catppuccin_mocha
+
+" Markdown: highlight fenced code blocks with the named language's syntax.
+let g:markdown_fenced_languages = ['sql', 'sh', 'bash=sh', 'zsh=sh', 'json', 'yaml', 'yml=yaml', 'toml', 'graphql', 'typescript', 'ts=typescript', 'javascript', 'js=javascript', 'python', 'vim']
