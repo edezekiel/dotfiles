@@ -19,6 +19,7 @@ idiomatic_version_file_enable_tools = ["node"]
 "brew:curl" = "latest"
 "brew:direnv" = "latest"
 "brew:eza" = "latest"
+"brew:fzf" = "latest"
 "brew:gh" = "latest"
 "brew:git" = "latest"
 "brew:git-delta" = "latest"
