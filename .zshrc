@@ -57,6 +57,9 @@ function lg() {
 	fi
 }
 
+# fzf: prompt at top, list grows downward
+export FZF_DEFAULT_OPTS="--layout=reverse"
+
 # Tool hooks: mise first so direnv and starship see mise-managed binaries
 eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
