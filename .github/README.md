@@ -6,7 +6,7 @@
 
 ## New machine
 
-Everything after the clone is declared in `~/.config/mise/config.toml` and applied by
+Packages and machine settings are declared in `~/.config/mise/config.toml` and applied by
 [mise bootstrap](https://mise.jdx.dev/bootstrap.html).
 
 ```sh
@@ -32,6 +32,14 @@ dot remote set-url origin git@github.com:edezekiel/dotfiles.git
 `mise bootstrap` installs the Homebrew formulae and casks, the mise-managed CLI tools, the
 betterleaks pre-commit hook and exclude list for the bare repo, and the macOS defaults. It is
 safe to run again at any time; `mise bootstrap status` shows what is in place.
+
+Calendar permission is a manual setup step: on each new Mac, open SwiftBar and
+grant Full Access when prompted, or enable it under System Settings → Privacy &
+Security → Calendars. macOS stores this approval in its privacy database, not in
+these dotfiles, so `mise bootstrap` does not grant or restore it.
+
+For menu-bar widget setup, Calendar permissions, and compiling the Swift helper,
+see the [SwiftBar README](../.config/swiftbar/README.md).
 
 ## Local overrides
 
