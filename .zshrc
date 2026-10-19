@@ -30,6 +30,8 @@ export PATH="$HOME/.local/bin:/opt/homebrew/opt/libpq/bin:$PATH:$HOME/go/bin"
 alias ls="eza --long --header --git"
 alias lsla="eza --long --header --git -a"
 alias tree="eza --tree --level=2"
+# bat: cat with syntax highlighting; no pager so it still behaves like cat
+alias cat="bat --paging=never"
 alias dot='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 alias h="alias"
 alias g="git"
