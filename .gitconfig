@@ -38,6 +38,7 @@
 	dark = true
 	side-by-side = true
 	line-numbers = true
+	paging = never
 
 # Machine-specific overrides, not tracked in dotfiles
 [include]
