@@ -1,0 +1,3 @@
+# Default "Monokai Extended" paints markdown headings/lists red. Catppuccin
+# Mocha matches the vim colorscheme.
+--theme="Catppuccin Mocha"
