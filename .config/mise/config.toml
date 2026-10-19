@@ -14,11 +14,13 @@ idiomatic_version_file_enable_tools = ["node"]
 
 # Homebrew formulae and casks. Homebrew itself must be installed first.
 [bootstrap.packages]
+"brew:bat" = "latest"
 "brew:betterleaks" = "latest"
 "brew:coreutils" = "latest"
 "brew:curl" = "latest"
 "brew:direnv" = "latest"
 "brew:eza" = "latest"
+"brew:fzf" = "latest"
 "brew:gh" = "latest"
 "brew:git" = "latest"
 "brew:git-delta" = "latest"

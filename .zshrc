@@ -30,8 +30,15 @@ export PATH="$HOME/.local/bin:/opt/homebrew/opt/libpq/bin:$PATH:$HOME/go/bin"
 alias ls="eza --long --header --git"
 alias lsla="eza --long --header --git -a"
 alias tree="eza --tree --level=2"
+# bat: cat with syntax highlighting; no pager so it still behaves like cat
+alias cat="bat --paging=never"
 alias dot='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
-alias h="alias"
+# h: list aliases, then the recipes cheatsheet
+function h() {
+	alias
+	echo
+	bat --paging=never --style=plain ~/.config/recipes.md
+}
 alias g="git"
 alias gsw="git switch"
 alias glo="git log -n 3 --oneline"
@@ -57,10 +64,21 @@ function lg() {
 	fi
 }
 
+# fzf: prompt at top, list grows downward
+export FZF_DEFAULT_OPTS="--layout=reverse"
+
+# f: fuzzy-pick a file with a bat preview and open it in $EDITOR
+function f() {
+	local file
+	file=$(fzf --preview 'bat --color=always --style=numbers --line-range=:300 {}') && ${EDITOR:-vim} "$file"
+}
+
 # Tool hooks: mise first so direnv and starship see mise-managed binaries
 eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
+# fzf keybindings: Ctrl-T file path, Ctrl-R history, Alt-C cd
+eval "$(fzf --zsh)"
 # zoxide takes over cd: real paths work as before, anything else matches by frecency (cd myrepo from anywhere)
 eval "$(zoxide init zsh --cmd cd)"
 
