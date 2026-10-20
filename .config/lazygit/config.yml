@@ -1,4 +1,7 @@
 git:
   diffRenderers:
+    # Delta: syntax-highlighted code inside the red/green diff lines. The
+    # "lazygit" feature replaces the default feature set from .gitconfig, so
+    # the pane gets a unified diff instead of side-by-side.
     - colorArg: always
-      command: delta --dark --paging=never --side-by-side=false
+      command: delta --paging=never --features lazygit
