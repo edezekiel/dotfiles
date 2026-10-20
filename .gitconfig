@@ -36,10 +36,15 @@
 [delta]
 	navigate = true
 	dark = true
-	side-by-side = true
 	line-numbers = true
 	paging = never
+	features = side-by-side
+	syntax-theme = Catppuccin Mocha
 
 # Machine-specific overrides, not tracked in dotfiles
 [include]
 	path = ~/.gitconfig.local
+[delta "side-by-side"]
+	side-by-side = true
+[delta "lazygit"]
+	line-numbers = true
