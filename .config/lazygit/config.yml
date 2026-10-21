@@ -1,7 +1,11 @@
 git:
   diffRenderers:
-    # Delta: syntax-highlighted code inside the red/green diff lines. The
-    # "lazygit" feature replaces the default feature set from .gitconfig, so
-    # the pane gets a unified diff instead of side-by-side.
+    # The first renderer is the default; cycle to the next one in lazygit.
+    # Side-by-side. No -w: {{columnWidth}} is half the pane, and delta
+    # already picks up the pane width from lazygit's COLUMNS.
+    - colorArg: always
+      command: delta --paging=never --features side-by-side
+    # Unified. The "lazygit" feature replaces the default feature set from
+    # .gitconfig, so the pane gets a unified diff instead of side-by-side.
     - colorArg: always
       command: delta --paging=never --features lazygit
