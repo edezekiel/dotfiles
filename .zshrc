@@ -79,7 +79,7 @@ function f() {
 # live ripgrep: type a pattern, preview the hit, Enter opens it in $EDITOR at that line
 function rgf() {
 	local rg='rg --column --line-number --no-heading --color=always --smart-case'
-	fzf --ansi --disable-search --delimiter : \
+	fzf --ansi --disabled --delimiter : \
 		--bind "start:reload:$rg {q} || true" \
 		--bind "change:reload:sleep 0.1; $rg {q} || true" \
 		--preview 'bat --color=always --style=numbers --highlight-line {2} {1}' \
