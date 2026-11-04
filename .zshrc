@@ -1,4 +1,4 @@
-# ~/.zshrc — plain zsh, no framework. Tools: mise, direnv, starship, eza, yazi.
+# ~/.zshrc — plain zsh, no framework. Tools: mise, direnv, starship, eza, yazi, fzf, ripgrep, fd.
 
 # History
 HISTFILE="$HOME/.zsh_history"
@@ -33,9 +33,12 @@ alias tree="eza --tree --level=2"
 # bat: cat with syntax highlighting; no pager so it still behaves like cat
 alias cat="bat --paging=never"
 alias dot='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
-# h: list aliases, then the recipes cheatsheet
+# list aliases and the functions below, then the recipes cheatsheet
 function h() {
 	alias
+	echo
+	# each function in this file, with the comment line directly above it
+	awk '/^# /{c=substr($0,3)} /^$/{c=""} /^function /{sub(/^function /,""); sub(/\(\).*/,""); printf "%-5s %s\n", $0, c}' ~/.zshrc
 	echo
 	bat --paging=never --style=plain ~/.config/recipes.md
 }
@@ -45,7 +48,7 @@ alias glo="git log -n 3 --oneline"
 alias ..="cd .."
 alias ...="cd ../.."
 
-# yazi: cd to the directory yazi was in on exit
+# yazi, then cd to the directory it was in on exit
 function y() {
 	local tmp cwd; tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	command yazi "$@" --cwd-file="$tmp"
@@ -54,7 +57,7 @@ function y() {
 	command rm -f -- "$tmp"
 }
 
-# lazygit: cd to the directory lazygit was in on exit (repo or worktree switches)
+# lazygit, then cd to the directory it was in on exit (repo or worktree switches)
 function lg() {
 	export LAZYGIT_NEW_DIR_FILE="${TMPDIR:-/tmp}/lazygit-newdir"
 	command lazygit "$@"
@@ -67,10 +70,22 @@ function lg() {
 # fzf: prompt at top, list grows downward
 export FZF_DEFAULT_OPTS="--layout=reverse"
 
-# f: fuzzy-pick a file with a bat preview and open it in $EDITOR
+# fuzzy-pick a file with a bat preview and open it in $EDITOR
 function f() {
 	local file
 	file=$(fzf --preview 'bat --color=always --style=numbers --line-range=:300 {}') && ${EDITOR:-vim} "$file"
+}
+
+# live ripgrep: type a pattern, preview the hit, Enter opens it in $EDITOR at that line
+function rgf() {
+	local rg='rg --column --line-number --no-heading --color=always --smart-case'
+	fzf --ansi --disabled --delimiter : \
+		--bind "start:reload:$rg {q} || true" \
+		--bind "change:reload:sleep 0.1; $rg {q} || true" \
+		--preview 'bat --color=always --style=numbers --highlight-line {2} {1}' \
+		--preview-window 'up,60%,+{2}+3/3' \
+		--query "${*:-}" \
+		--bind 'enter:become(${EDITOR:-vim} {1} +{2})'
 }
 
 # Tool hooks: mise first so direnv and starship see mise-managed binaries
