@@ -26,6 +26,10 @@ export VISUAL="vim"
 typeset -U path PATH
 export PATH="$HOME/.local/bin:/opt/homebrew/opt/libpq/bin:$PATH:$HOME/go/bin"
 
+# Load SSH keys from the macOS keychain. AddKeysToAgent in ~/.ssh/config only
+# fires on ssh connections, so commit signing would otherwise find no key after a reboot.
+[[ $OSTYPE == darwin* ]] && ssh-add --apple-load-keychain -q 2>/dev/null
+
 # Aliases
 alias ls="eza --long --header --git"
 alias lsla="eza --long --header --git -a"
